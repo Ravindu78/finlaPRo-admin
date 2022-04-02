@@ -20,7 +20,7 @@ class _LabDetailsState extends State<LabDetails> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.deepPurple,
         title: InkWell(
             onTap: (){
               //  Navigator.push(context, MaterialPageRoute(builder: (context)=> new HomePage()));

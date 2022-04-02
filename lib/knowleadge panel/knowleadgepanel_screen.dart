@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sgm_admin/knowleadge%20panel/labs/addlabdetails_screen.dart';
 import 'package:sgm_admin/knowleadge%20panel/labs/recentltAded_labs_screen.dart';
+import 'package:sgm_admin/knowleadge%20panel/news%20panel/add_news_panel_screen.dart';
 
 class KnowleadgePanel extends StatefulWidget {
   const KnowleadgePanel({Key? key}) : super(key: key);
@@ -19,7 +20,14 @@ class _KnowleadgePanelState extends State<KnowleadgePanel> {
           children: [
             Card(
               child: ListTile(
-                onTap: (){},
+                onTap: (){
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const News(),
+                    ),
+                  );
+                },
                 title: Text('NEWS PANEL'),
                 subtitle: Text(
                     'Latest News'

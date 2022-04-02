@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:sgm_admin/reusable/reuse.dart';
 import 'package:sgm_admin/utils/color_utils.dart';
@@ -18,7 +20,12 @@ class News extends StatefulWidget {
 class _NewsState extends State<News> {
   File? file;
   late String imagePath;
-  late Uint8List fileBytes;
+  late Uint8List image1;
+  late Uint8List image2;
+  late Uint8List image3;
+  bool image1set = false;
+  bool image2set = false;
+  bool image3set = false;
   String fileName = '';
 
   @override
@@ -52,25 +59,27 @@ class _NewsState extends State<News> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          selectImage();
+                          selectImage(imageNo: 1);
                         },
                         child: Text('Select Image 1'),
                       ),
                     ),
                     Expanded(
-                      child: (fileName == '')
+                      child: (!image1set)
                           ? Center(
                               child: Text('Select an Image 1'),
                             )
                           : Center(
-                              child: Text(fileName),
+                              child: Image.memory(image1),
                             ),
                     ),
                     Expanded(
                       child: firebaseUIButton5(
                         context,
                         "Add",
-                        () {},
+                        () {
+                          uploadImage(imageNo: 1);
+                        },
                       ),
                     ),
                   ],
@@ -86,25 +95,27 @@ class _NewsState extends State<News> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          selectImage();
+                          selectImage(imageNo: 2);
                         },
                         child: Text('Select Image 2'),
                       ),
                     ),
                     Expanded(
-                      child: (fileName == '')
+                      child: (!image2set)
                           ? Center(
                               child: Text('Select an Image 2'),
                             )
                           : Center(
-                              child: Text(fileName),
+                              child: Image.memory(image2),
                             ),
                     ),
                     Expanded(
                       child: firebaseUIButton5(
                         context,
                         "Add",
-                        () {},
+                        () {
+                          uploadImage(imageNo: 2);
+                        },
                       ),
                     ),
                   ],
@@ -119,25 +130,27 @@ class _NewsState extends State<News> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          selectImage();
+                          selectImage(imageNo: 3);
                         },
                         child: Text('Select Image 3'),
                       ),
                     ),
                     Expanded(
-                      child: (fileName == '')
+                      child: (!image3set)
                           ? Center(
                               child: Text('Select an Image 3'),
                             )
                           : Center(
-                              child: Text(fileName),
+                              child: Image.memory(image3),
                             ),
                     ),
                     Expanded(
                       child: firebaseUIButton5(
                         context,
                         "Add",
-                        () {},
+                        () {
+                          uploadImage(imageNo: 3);
+                        },
                       ),
                     ),
                   ],
@@ -148,14 +161,75 @@ class _NewsState extends State<News> {
     );
   }
 
-  Future selectImage() async {
+  Future selectImage({required int imageNo}) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
-      fileBytes = result.files.first.bytes!;
-      setState(() {
-        fileName = result.files.first.name;
-      });
+    if(imageNo == 1){
+      if (result != null) {
+        image1 = result.files.first.bytes!;
+        setState(() {
+          image1set = true;
+        });
+      }
+    }else if (imageNo == 2){
+      if (result != null) {
+        image2 = result.files.first.bytes!;
+        setState(() {
+          image2set = true;
+        });
+      }
+    }else{
+      if (result != null) {
+        image3 = result.files.first.bytes!;
+        setState(() {
+          image3set = true;
+        });
+      }
     }
   }
+
+  Future<void> uploadImage({required int imageNo}) async{
+
+    Timestamp time = Timestamp.now();
+    String filename = '$time';
+
+    if(imageNo == 1){
+      try{
+        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image1);
+        final url = await ref.ref.getDownloadURL();
+        print(url);
+        return FirebaseFirestore.instance.collection("newspanel").doc('image1').set({
+          'imgUrl':url,
+        }).then((value) => print("Image Added")).catchError((error) => print("Failed to add image: $error"));
+      } on FirebaseException catch (e) {
+        print('image upload error');
+      }
+    }else if (imageNo == 2){
+      try{
+        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image1);
+        final url = await ref.ref.getDownloadURL();
+        print(url);
+        return FirebaseFirestore.instance.collection("newspanel").doc('image2').set({
+          'imgUrl':url,
+        }).then((value) => print("Image Added")).catchError((error) => print("Failed to add image: $error"));
+      } on FirebaseException catch (e) {
+        print('image upload error');
+      }
+    }else{
+      try{
+        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image1);
+        final url = await ref.ref.getDownloadURL();
+        print(url);
+        return FirebaseFirestore.instance.collection("newspanel").doc('image3').set({
+          'imgUrl':url,
+        }).then((value) => print("Image Added")).catchError((error) => print("Failed to add image: $error"));
+      } on FirebaseException catch (e) {
+        print('image upload error');
+      }
+    }
+
+
+
+  }
+
 }

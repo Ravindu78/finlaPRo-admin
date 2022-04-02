@@ -206,7 +206,7 @@ class _NewsState extends State<News> {
       }
     }else if (imageNo == 2){
       try{
-        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image1);
+        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image2);
         final url = await ref.ref.getDownloadURL();
         print(url);
         return FirebaseFirestore.instance.collection("newspanel").doc('image2').set({
@@ -217,7 +217,7 @@ class _NewsState extends State<News> {
       }
     }else{
       try{
-        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image1);
+        final ref = await FirebaseStorage.instance.ref('newspanel/$filename').putData(image3);
         final url = await ref.ref.getDownloadURL();
         print(url);
         return FirebaseFirestore.instance.collection("newspanel").doc('image3').set({

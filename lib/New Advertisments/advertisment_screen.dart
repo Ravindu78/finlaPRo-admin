@@ -16,7 +16,8 @@ class _AdvertismentState extends State<Advertisment> {
       body: Container(
         child: Center(
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('Advertisment').snapshots(),
+            stream: FirebaseFirestore.instance.collection('Advertisment').
+            where("publish", isEqualTo: "false").snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
                 return Text('Something went wrong');

@@ -3,6 +3,8 @@ import 'package:sgm_admin/knowleadge%20panel/labs/addlabdetails_screen.dart';
 import 'package:sgm_admin/knowleadge%20panel/labs/recentltAded_labs_screen.dart';
 import 'package:sgm_admin/knowleadge%20panel/news%20panel/add_news_panel_screen.dart';
 
+import 'courses/recent_courses_screen.dart';
+
 class KnowleadgePanel extends StatefulWidget {
   const KnowleadgePanel({Key? key}) : super(key: key);
 
@@ -53,7 +55,14 @@ class _KnowleadgePanelState extends State<KnowleadgePanel> {
             ),
             Card(
               child: ListTile(
-                onTap: (){},
+                onTap: (){
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const Courses(),
+                    ),
+                  );
+                },
                 title: Text('COURSES'),
                 subtitle: Text(
                     'Courses and Deplomas'

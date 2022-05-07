@@ -5,6 +5,7 @@ import 'package:sgm_admin/knowleadge%20panel/labs/addlabdetails_screen.dart';
 import 'package:sgm_admin/New%20Advertisments/advertiesment_details_screen.dart';
 import 'package:sgm_admin/New%20Advertisments/advertisment_screen.dart';
 import 'package:sgm_admin/knowleadge%20panel/knowleadgepanel_screen.dart';
+import 'package:sgm_admin/price%20checker/price%20cheker%20view.dart';
 
 
 class Home extends StatefulWidget {
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
               ),
               SideMenuItem(
                 priority: 2,
-                title: 'Files',
+                title: 'price checker',
                 onTap: () {
                   page.jumpToPage(2);
                 },
@@ -133,10 +134,7 @@ class _HomeState extends State<Home> {
                 Container(
                   color: Colors.white,
                   child: Center(
-                    child: Text(
-                      'Page\n   3',
-                      style: TextStyle(fontSize: 35),
-                    ),
+                    child: PriceChecker()
                   ),
                 ),
                 Container(

@@ -20,12 +20,14 @@ class _PriceUpdateState extends State<PriceUpdate> {
 
   void updatePrice01 (double price01) {
     final data = {"price01":price01 };
-    db.collection("PriceChecker").doc(_varientColorController.text).set(data, SetOptions(merge: true));
+    db.collection("PriceChecker").doc(_varientNameController.text).set({"time":DateTime.now()}, SetOptions(merge: true));
+    db.collection("PriceChecker").doc(_varientNameController.text).collection("colors").doc(_varientColorController.text).set(data, SetOptions(merge: true));
   }
 
   void updatePrice02 (double price02) {
     final data = {"price02":price02 };
-    db.collection("PriceChecker").doc(_varientColorController.text).set(data, SetOptions(merge: true));
+    db.collection("PriceChecker").doc(_varientNameController.text).set({"time":DateTime.now()}, SetOptions(merge: true));
+    db.collection("PriceChecker").doc(_varientNameController.text).collection("colors").doc(_varientColorController.text).set(data, SetOptions(merge: true));
   }
 
 

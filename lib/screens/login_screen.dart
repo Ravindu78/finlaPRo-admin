@@ -25,15 +25,18 @@ class _LoginState extends State<Login> {
                 20, MediaQuery.of(context).size.height * 0.2, 20, 0),
             child: Column(
               children: <Widget>[
-
+                logoWidget('assets/images/logo.png'),
                 reusableTextField("Enter Email", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
 
                 reusableTextField("Enter Password", Icons.person_outline, false,
                     _passwordTextController),
+                const SizedBox(
+                  height: 10,
+                ),
                 firebaseUIButton(context, "Sign In", () {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(

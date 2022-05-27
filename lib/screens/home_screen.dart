@@ -1,4 +1,5 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sgm_admin/knowleadge%20panel/labs/addlab.dart';
 import 'package:sgm_admin/knowleadge%20panel/labs/addlabdetails_screen.dart';
@@ -96,25 +97,15 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.file_copy_rounded),
               ),
               SideMenuItem(
-                priority: 3,
-                title: 'Download',
-                onTap: () {
-                  page.jumpToPage(3);
-                },
-                icon: Icon(Icons.download),
-              ),
-              SideMenuItem(
                 priority: 4,
-                title: 'Settings',
-                onTap: () {
-                  page.jumpToPage(4);
-                },
-                icon: Icon(Icons.settings),
-              ),
-              SideMenuItem(
-                priority: 6,
                 title: 'Exit',
-                onTap: () async {},
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut().whenComplete(() {
+                    Navigator.pushReplacementNamed(context, '/1');
+                  },);
+
+
+                },
                 icon: Icon(Icons.exit_to_app),
               ),
             ],
@@ -140,19 +131,7 @@ class _HomeState extends State<Home> {
                 Container(
                   color: Colors.white,
                   child: Center(
-                    child: Text(
-                      'Page\n   4',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  child: Center(
-                    child: Text(
-                      'Page\n   5',
-                      style: TextStyle(fontSize: 35),
-                    ),
+
                   ),
                 ),
               ],

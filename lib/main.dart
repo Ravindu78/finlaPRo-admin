@@ -33,8 +33,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: initialPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => initialPage(),
+        '/1': (context) => Login(),
+      },
     );
+
   }
 }
 

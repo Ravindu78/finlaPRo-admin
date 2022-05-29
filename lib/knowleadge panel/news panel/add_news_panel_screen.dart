@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:sgm_admin/reusable/reuse.dart';
 import 'package:sgm_admin/utils/color_utils.dart';
 
-import '../../../utils/color_utils.dart';
+import '../../utils/color_utils.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);

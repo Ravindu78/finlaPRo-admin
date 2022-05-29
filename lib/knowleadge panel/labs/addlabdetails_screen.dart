@@ -12,7 +12,7 @@ import 'package:sgm_admin/screens/home_screen.dart';
 import 'package:sgm_admin/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/color_utils.dart';
+import '../../utils/color_utils.dart';
 import 'addlab.dart';
 
 class Lab extends StatefulWidget {
